@@ -48,6 +48,10 @@ class OrdenCompra{
 class DetalleOrden{
     private int cantidad;
     
+    public DetalleOrden(int c){
+        cantidad = c;
+    }
+    
     public void calcularPrecio(){
         
     }
@@ -67,36 +71,58 @@ class Articulo{
     private String nombre;
     private String descripcion;
     private float precio;  
+    
+    public Articulo(){
+       
+    }
 }
 
 class Pago{
     private float monto;
     private Date fecha;
+    
+    public Pago(){
+        
+    }
 }
 
 class Efectivo extends Pago{
-    
+    public Efectivo(){
+        
+    }
 }
 class Transferencia extends Pago{
-    
+    public Transferencia(){
+        
+    }
 }
 
 class Tarjeta extends Pago{
-    
+    public Tarjeta(){
+        
+    }
 }
 
 class DocumentoTributario{
     private String numero;
     private String rut;
     private Date fecha;
+    
+    public DocumentoTributario(){
+        
+    }
 }
 
 class Factura extends DocumentoTributario{
-    
+    public Factura(){
+        
+    }
 }
 
 class Boleta extends DocumentoTributario{
-    
+    public Boleta(){
+        
+    }
 }
 
 public class Tarea1 {
