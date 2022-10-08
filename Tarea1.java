@@ -66,18 +66,21 @@ class DetalleOrden{
         detalle = new ArrayList();
     }
     
-    public void calcularPrecio(){
+    public double calcularPrecio(Articulo art){
         //calcular precio total
-        
+        double calcularPrecio = (float)cantidad*art.getPrecio()*1.19;
+        return calcularPrecio;
     }
-    public void calcularPrecioSinIva(){
-        
+    public double calcularPrecioSinIva(Articulo art){
+        double iva = art.getPrecio()*0.19;
+        return cantidad*art.getPrecio() - cantidad*iva;
     }
-    public void calcularIva(){
-        
+    public double calcularIva(Articulo art){
+        double iva= art.getPrecio()*0.19;
+        return iva*cantidad;
     }
-    public void calcularPeso(){
-        
+    public float calcularPeso(Articulo art){
+        return art.getPeso()*cantidad;
     }
 }
 
@@ -87,10 +90,10 @@ class Articulo{
     private String descripcion;
     private float precio;  
     
-    public Articulo(String nom, String desc, float peso, float p){
+    public Articulo(String nom, String desc, float peso, float prec){
        this.nombre = nom;
        this.descripcion = desc;
-       this.precio = p;
+       this.precio = prec;
        this.peso = peso;
     }
     public String getNombre(){
@@ -110,6 +113,12 @@ class Articulo{
     }
     public void setPrecio(Float nuevoPrecio){
         this.precio= nuevoPrecio;
+    }
+    public Float getPeso(){
+        return this.peso;
+    }
+    public void setPeso(Float nuevoPeso){
+        this.precio= nuevoPeso;
     }
 }
  
@@ -134,6 +143,7 @@ class Efectivo extends Pago{
         float total = super.getMonto();
         return pagado-total;
     }
+    
 }
 class Transferencia extends Pago{
     private String banco;
@@ -163,8 +173,8 @@ class DocumentoTributario{
 }
 
 class Factura extends DocumentoTributario{
-    public Factura(){
-        
+    public Factura(int i){
+ //       super(i);
     }
 }
 
