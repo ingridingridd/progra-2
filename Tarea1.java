@@ -141,7 +141,7 @@ class Efectivo extends Pago{
     public float calcDevolucion(float pagado){
         //vuelto
         float total = super.getMonto();
-        return pagado-total;
+        return total-pagado;
     }
     
 }
@@ -188,16 +188,16 @@ public class Tarea1 {
 
     public static void main(String[] args) {
         OrdenCompra orden = new OrdenCompra("entregado");
-        DetalleOrden det = new DetalleOrden(1); 
+        DetalleOrden det = new DetalleOrden(10); 
         Articulo art = new Articulo("chocochips", "con chips de chocolate", 200, 1000);
         Articulo art1 = new Articulo("Rolls", "mani cubierto de chocolate", 150, 1500);
-        Pago pa = new Pago(10000);
-        Efectivo e = new Efectivo(10000);
+        Pago pa = new Pago(20000);
+        Efectivo e = new Efectivo(20000);
         System.out.println(art.getNombre());
         System.out.println(art.getDescripcion());
         System.out.println(det.calcularIva(art));
         System.out.println(art1.getNombre());
-        System.out.println(e.calcDevolucion(10000));
+        System.out.println("vuelto: " + e.calcDevolucion(10000));
     }
     
 }
