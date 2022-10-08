@@ -69,6 +69,7 @@ class DetalleOrden{
     public double calcularPrecio(Articulo art){
         //calcular precio total
         double calcularPrecio = (float)cantidad*art.getPrecio()*1.19;
+        detalle.add(cantidad, art);
         return calcularPrecio;
     }
     public double calcularPrecioSinIva(Articulo art){
@@ -81,6 +82,9 @@ class DetalleOrden{
     }
     public float calcularPeso(Articulo art){
         return art.getPeso()*cantidad;
+    }
+    public void addDetalle(Articulo a){
+        detalle.add(a);
     }
 }
 
@@ -125,6 +129,7 @@ class Articulo{
 class Pago{
     private float monto;
     private Date fecha;
+    private int tipoPago;
     
     public Pago(float mont){
         monto = mont;
@@ -148,8 +153,9 @@ class Efectivo extends Pago{
 class Transferencia extends Pago{
     private String banco;
     private String numCuenta;
-    public Transferencia(){
-        
+    
+    public Transferencia(int i){
+        super(i);
     }
 }
 
@@ -191,13 +197,21 @@ public class Tarea1 {
         DetalleOrden det = new DetalleOrden(10); 
         Articulo art = new Articulo("chocochips", "con chips de chocolate", 200, 1000);
         Articulo art1 = new Articulo("Rolls", "mani cubierto de chocolate", 150, 1500);
+        det.addDetalle(art);
+        det.addDetalle(art1);
         Pago pa = new Pago(20000);
         Efectivo e = new Efectivo(20000);
+
+        
         System.out.println(art.getNombre());
         System.out.println(art.getDescripcion());
         System.out.println(det.calcularIva(art));
         System.out.println(art1.getNombre());
         System.out.println("vuelto: " + e.calcDevolucion(10000));
+        System.out.println("Peso total (gramos):" + det.calcularPeso(art));
+        for(int i=0; i<100; i++){
+//            System.out.println("articulo: " + det.[i]);
+        }
     }
     
 }
