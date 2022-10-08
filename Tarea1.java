@@ -37,9 +37,9 @@ class OrdenCompra{
     private Date fecha;
     private String estado;
     
-    public OrdenCompra(Date f, String est){
+    public OrdenCompra(String est){
         //constructor
-        fecha = f;
+      //  fecha = f;
         estado = est;
     }
     public void calcularPrecioSinIva(){
@@ -186,11 +186,18 @@ class Boleta extends DocumentoTributario{
 
 public class Tarea1 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        OrdenCompra orden = new OrdenCompra("entregado");
+        DetalleOrden det = new DetalleOrden(1); 
+        Articulo art = new Articulo("chocochips", "con chips de chocolate", 200, 1000);
+        Articulo art1 = new Articulo("Rolls", "mani cubierto de chocolate", 150, 1500);
+        Pago pa = new Pago(10000);
+        Efectivo e = new Efectivo(10000);
+        System.out.println(art.getNombre());
+        System.out.println(art.getDescripcion());
+        System.out.println(det.calcularIva(art));
+        System.out.println(art1.getNombre());
+        System.out.println(e.calcDevolucion(10000));
     }
     
 }
