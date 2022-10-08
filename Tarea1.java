@@ -11,7 +11,12 @@ class Cliente{
         nombre = nom;
         rut = r;
     }
-    
+    public String getNombreCliente(){
+        return this.nombre;
+    }
+    public void setNombreCliente(String nuevoNomCliente){
+        this.nombre = nuevoNomCliente;
+    }
 }
 
 class Direccion{
@@ -20,6 +25,12 @@ class Direccion{
     public Direccion( String direc){
         direccion = direc;
     } 
+    public String getDireccion(){
+        return this.direccion;
+    }
+    public void setDireccion(String newDireccion){
+        this.direccion = newDireccion;
+    }
 }
 
 class OrdenCompra{
@@ -106,17 +117,22 @@ class Pago{
     private float monto;
     private Date fecha;
     
-    public Pago(){
-        
+    public Pago(float mont){
+        monto = mont;
+    }
+    public Float getMonto(){
+        return this.monto;
     }
 }
 
 class Efectivo extends Pago{
-    public Efectivo(){
-        
+    public Efectivo(int i){
+        super(i);
     }
-    public void calcDevolucion(){
-        
+    public float calcDevolucion(float pagado){
+        //vuelto
+        float total = super.getMonto();
+        return pagado-total;
     }
 }
 class Transferencia extends Pago{
