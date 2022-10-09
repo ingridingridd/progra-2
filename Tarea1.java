@@ -69,12 +69,13 @@ class DetalleOrden{
     public double calcularPrecio(Articulo art){
         //calcular precio total
         double calcularPrecio = (float)cantidad*art.getPrecio()*1.19;
-        detalle.add(cantidad, art);
+//        detalle.add(cantidad, art);
         return calcularPrecio;
     }
     public double calcularPrecioSinIva(Articulo art){
-        double iva = art.getPrecio()*0.19;
-        return cantidad*art.getPrecio() - cantidad*iva;
+//        double iva = art.getPrecio()*0.19;
+//        return cantidad*art.getPrecio() - cantidad*iva;
+          return cantidad*art.getPrecio();
     }
     public double calcularIva(Articulo art){
         double iva= art.getPrecio()*0.19;
@@ -209,9 +210,8 @@ public class Tarea1 {
         System.out.println(art1.getNombre());
         System.out.println("vuelto: " + e.calcDevolucion(10000));
         System.out.println("Peso total (gramos):" + det.calcularPeso(art));
-        for(int i=0; i<100; i++){
-//            System.out.println("articulo: " + det.[i]);
-        }
+        System.out.println(det.calcularPrecioSinIva(art));
+        System.out.println(det.calcularPrecio(art));
     }
     
 }
