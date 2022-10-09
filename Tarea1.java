@@ -68,10 +68,7 @@ class OrdenCompra{
     public void calcularPeso(){
         
     }
-    public void addDet(int cant, Articulo a){
-        
-    }
-    
+
     public String getEstado(){
         return this.estado;
     }
@@ -91,7 +88,6 @@ class DetalleOrden{
     public double calcPrecio(Articulo art){
         //calcular precio total
         double calcularPrecio = (float)cantidad*art.getPrecio()*1.19;
-//        detalle.add(cantidad, art);
         return calcularPrecio;
     }
     public double calcPrecioSinIva(Articulo art){
@@ -155,7 +151,6 @@ class Pago{
     private float monto;
     private Date fecha;
 
-    
     public Pago(float mont){
         monto = mont;
     }
@@ -176,9 +171,7 @@ class Efectivo extends Pago{
         float total = super.getMonto();
         return pagado-total;
     }
-    public String metodoPago(){
-        return super.metodoPago()+ "Efectivo";
-    }
+
 }
 class Transferencia extends Pago{
     private String banco;
@@ -199,8 +192,14 @@ class Tarjeta extends Pago{
     private String tipo;
     private String numTransaccion;
     
-    public Tarjeta(int i){
+    public Tarjeta(int i, String tipoTarj, String numTrans){
         super(i);
+        tipo= tipoTarj;
+        numTransaccion = numTrans; 
+    }
+    
+    public String getTipoTarj(){
+        return this.tipo;
     }
 }
 
@@ -233,8 +232,8 @@ class Factura extends DocumentoTributario{
 }
 
 class Boleta extends DocumentoTributario{
-    public Boleta(){
-        
+    public Boleta(String numero, String rut){
+        super(numero, rut);
     }
 }
 
@@ -260,7 +259,7 @@ public class Tarea1 {
         DetalleOrden det3 = new DetalleOrden(3);
         Articulo art1 = new Articulo("milka", "chocolate con relleno de trufa", 150, 1600);
         Articulo art2 = new Articulo("super8", "galleta cubierta de chocolate", 80, 300);
-        Articulo art3 = new Articulo("chocochips", "con chips de chocolate", 200, 1000);
+        Articulo art3 = new Articulo("ramitas", "ramitas sabor queso", 100, 600);
         Articulo art4 = new Articulo("chocman", "Bizcocho bañado de chocolate", 70, 300);
         Articulo art5 = new Articulo("chocochips", "con chips de chocolate", 200, 1000);
         Articulo art6 = new Articulo("Sprite", "bebida salor limon", 500, 1200);
@@ -296,8 +295,6 @@ public class Tarea1 {
          System.out.println("IVA producto 2: " + det1.calcIva(detalle1.get(1)));
         */ 
          System.out.println("---Detalle Pago---");
-         Transferencia tr = new Transferencia(2, "Estado", "189023");
-         System.out.println("Banco: " + tr.getBanco());
          
         //"Tipo Documento:"
          DocumentoTributario doc = new DocumentoTributario("123", "12345-6");
@@ -309,7 +306,7 @@ public class Tarea1 {
 
         Pago pa = new Pago(10000);
         Efectivo e = new Efectivo(20000);
-        System.out.println("Tipo pago: ");
+        System.out.println("Tipo pago: Efectivo");
         System.out.println("vuelto: " + e.calcDevolucion(10000));
         
         //orden2
@@ -328,6 +325,10 @@ public class Tarea1 {
         System.out.println("TOTAL: " + total2);
         System.out.println("Estado: " + orden1.getEstado());
         
+        System.out.println("---Detalle Pago---");
+         Transferencia tr = new Transferencia(2, "Banco Estado", "18902893");
+         System.out.println("Tipo de pago: transferencia");
+         System.out.println("Banco: " + tr.getBanco());
         //"Tipo Documento:"
          DocumentoTributario docu2 = new DocumentoTributario("12", "1232845-6");
          Factura factura2 = new Factura("13", "123405-6"); 
@@ -335,11 +336,38 @@ public class Tarea1 {
              System.out.println("Tipo Documento: Factura");
          }
          else System.out.println("Tipo Documento: Boleta");
-
         Pago pa2 = new Pago(10000);
         Efectivo e2 = new Efectivo(10000);
-        System.out.println("Tipo pago: ");
-        System.out.println("vuelto: " + e2.calcDevolucion(5000));
+        
+        //orden3
+        System.out.println();
+        System.out.println(cliente1.getNombreCliente()+" " + cliente1.getRutCliente()+ " " + cliente1.getDirCliente());
+        System.out.println("---Detalle compra---");
+        
+        OrdenCompra orden3 = new OrdenCompra("Pagado");
+        DetalleOrden det6 = new DetalleOrden(3);
+        DetalleOrden det7 = new DetalleOrden(3);
+        
+        System.out.println("Cantidad: " + det6.getCantidad()+ " " +art6.getNombre() + " " + art6.getDescripcion() + " " + art6.getPeso()+ "gr " + art6.getPrecio()+" PRECIO:"+ det6.calcPrecioSinIva(art6)+" IVA:"+ det6.calcIva(art6)+" TOTAL:"+ det6.calcPrecio(art6));
+        System.out.println("Cantidad: " + det7.getCantidad()+" " + art3.getNombre() + " " + art3.getDescripcion() + " " + art3.getPeso()+ "gr " + art3.getPrecio()+" PRECIO:"+ det7.calcPrecioSinIva(art3)+" IVA:"+ det7.calcIva(art5)+" TOTAL:"+ det7.calcPrecio(art3));
+        
+        double total3 = det6.calcPrecio(art6)+ det7.calcPrecio(art3);
+        System.out.println("TOTAL: " + total3);
+        System.out.println("Estado: " + orden3.getEstado());
+        
+        System.out.println("---Detalle Pago---");
+         Tarjeta tar = new Tarjeta(2, "Debito", "15");
+         System.out.println("Tipo de pago: tarjeta");
+         System.out.println(tar.getTipoTarj());
+      
+        //"Tipo Documento:"
+         DocumentoTributario docu3 = new DocumentoTributario("15", "1232845-6");
+         Factura factura3 = new Factura("13", "123405-6"); 
+         if(docu2.getNumero().equals(factura3.getNumero())){
+             System.out.println("Tipo Documento: Factura");
+         }
+         else System.out.println("Tipo Documento: Boleta");
+
     }
     
 }
