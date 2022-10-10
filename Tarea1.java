@@ -150,6 +150,7 @@ class Articulo{
 class Pago{
     private float monto;
     private Date fecha;
+    public DetalleOrden detOrden;
 
     public Pago(float mont){
         monto = mont;
@@ -168,8 +169,7 @@ class Efectivo extends Pago{
     }
     public float calcDevolucion(float pagado){
         //vuelto
-        float total = super.getMonto();
-        return pagado-total;
+        return super.getMonto();
     }
 
 }
@@ -252,7 +252,7 @@ public class Tarea1 {
         Direccion direc2 = new Direccion("Los Lirios 189");
         cliente2.direc = direc2;
         
-        
+        //orden1
         OrdenCompra orden1 = new OrdenCompra("Pagado");
         DetalleOrden det1 = new DetalleOrden(2);
         DetalleOrden det2 = new DetalleOrden(5);
@@ -273,29 +273,8 @@ public class Tarea1 {
         System.out.println("TOTAL: " + total);
         System.out.println("Estado: " + orden1.getEstado());
         
-        /*
-        ArrayList<Articulo> detalle1 = new ArrayList<>();
-            detalle1.add(new Articulo("chocochips", "con chips de chocolate", 200, 1000));
-            detalle1.add(new Articulo("Rolls", "mani cubierto de chocolate", 150, 1500));
-            detalle1.add(new Articulo("milka", "chocolate con relleno de trufa", 150, 1600));
-            detalle1.add(new Articulo("super8", "galleta cubierta de chocolate", 80, 300));
-            detalle1.add(new Articulo("chocman", "Bizcocho bañado de chocolate", 70, 300));
-         
-         System.out.println("---Detalle compra---");
-         System.out.println("Estado: " + orden1.getEstado());
-         
-        // System.out.println(art1.getNombre()+ ": " + art1.getDescripcion()+ " " + art1.getPrecio());
-         System.out.println(detalle1.get(0).getNombre() + " " +detalle1.get(0).getDescripcion()+ " " + detalle1.get(0).getPeso()+" gr " + " " +detalle1.get(0).getPrecio());
-         System.out.println(detalle1.get(1).getNombre() + " " +detalle1.get(1).getDescripcion()+ " " + detalle1.get(1).getPeso()+" gr " + " " +detalle1.get(1).getPrecio());
-         System.out.println(detalle1.get(2).getNombre() + " " +detalle1.get(2).getDescripcion()+ " " + detalle1.get(2).getPeso()+" gr " + " " +detalle1.get(2).getPrecio());
-         System.out.println(detalle1.get(3).getNombre() + " " +detalle1.get(3).getDescripcion()+ " " + detalle1.get(3).getPeso()+" gr " + " " +detalle1.get(3).getPrecio());
-         System.out.println(detalle1.get(4).getNombre() + " " +detalle1.get(4).getDescripcion()+ " " + detalle1.get(4).getPeso()+" gr " + " " +detalle1.get(4).getPrecio());
-         
-         System.out.println("IVA total: " + det1.calcIva(detalle1.get(0)));
-         System.out.println("IVA producto 2: " + det1.calcIva(detalle1.get(1)));
-        */ 
-         System.out.println("---Detalle Pago---");
-         
+        
+        System.out.println("---Detalle Pago---"); 
         //"Tipo Documento:"
          DocumentoTributario doc = new DocumentoTributario("123", "12345-6");
          Factura factura = new Factura("13", "12345-6"); 
@@ -304,10 +283,11 @@ public class Tarea1 {
          }
          else System.out.println("Tipo Documento: Boleta");
 
-        Pago pa = new Pago(10000);
-        Efectivo e = new Efectivo(20000);
+        Pago pa = new Pago(6664);
+        Efectivo e = new Efectivo(10000);
         System.out.println("Tipo pago: Efectivo");
-        System.out.println("vuelto: " + e.calcDevolucion(10000));
+        //pa.getMonto();
+        System.out.println("vuelto: " + (e.calcDevolucion(10000) - pa.getMonto()));
         
         //orden2
         System.out.println();
@@ -336,8 +316,8 @@ public class Tarea1 {
              System.out.println("Tipo Documento: Factura");
          }
          else System.out.println("Tipo Documento: Boleta");
-        Pago pa2 = new Pago(10000);
-        Efectivo e2 = new Efectivo(10000);
+        //Pago pa2 = new Pago(10000);
+        //Efectivo e2 = new Efectivo(10000);
         
         //orden3
         System.out.println();
